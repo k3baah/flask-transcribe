@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 import openai
 import requests
 import subprocess
@@ -19,6 +20,7 @@ app.after_request(add_cors_headers)
 
 
 @app.route("/transcribe", methods=["POST"])
+@cross_origin
 def transcribe():
     video_url = request.json["videoUrl"]
 
