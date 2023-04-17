@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 import openai
 import requests
 import subprocess
@@ -9,6 +8,15 @@ import tempfile
 app = Flask(__name__)
 
 openai.api_key = "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"
+
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'GET,POST'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+    return response
+
+app.after_request(add_cors_headers)
+
 
 @app.route("/transcribe", methods=["POST"])
 def transcribe():
