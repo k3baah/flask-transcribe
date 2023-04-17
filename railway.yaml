@@ -1,0 +1,4 @@
+build:
+  context: .
+  docker:
+    path: Dockerfile
