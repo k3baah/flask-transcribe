@@ -7,7 +7,7 @@ import os
 import tempfile
 
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
 
 openai.api_key = "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"
 
@@ -44,7 +44,9 @@ def transcribe():
     os.remove(video_path)
     os.remove(audio_path)
 
-    return jsonify({"transcription": transcript})
+   response = jsonify({"transcription": transcript})
+   response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
